@@ -16,6 +16,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 const moment = require('moment');
+const _ = require('lodash');
 /**
  * Injects entity model object with a default alias name property.
  *
@@ -43,5 +44,17 @@ function formatDate(date, includeTime) {
 	return formatter.format('YYYY-MM-DD');
 }
 
+function extractAttribute(attr, path) {
+	'use strict';
+	if (attr) {
+		if (path) {
+			return _.get(attr, path, '?');
+		}
+		return attr;
+	}
+	return '?';
+}
+
+exports.extractAttribute = extractAttribute;
 exports.injectDefaultAliasName = injectDefaultAliasName;
 exports.formatDate = formatDate;
