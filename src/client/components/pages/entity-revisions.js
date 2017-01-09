@@ -18,7 +18,8 @@
  */
 const React = require('react');
 const bootstrap = require('react-bootstrap');
-const formatDateWithinDay = require('../../helpers/utils').formatDateWithinDay;
+const formatDate = require('../../helpers/utils').formatDate;
+const isWithinDay = require('../../helpers/utils').isWithinDay;
 
 const Row = bootstrap.Row;
 const Col = bootstrap.Col;
@@ -79,8 +80,9 @@ class EntityRevisions extends React.Component {
 * @returns {ReactElement} a HTML document which is a part of the Revision page
 */
 	renderRevision(revision) {
+		const createdDate = new Date(revision.revision.createdAt);
 		const dateLabel =
-			formatDateWithinDay(new Date(revision.revision.createdAt));
+			formatDate(createdDate, isWithinDay(createdDate));
 		const header = (
 			<h4 className="list-group-item-heading">
 				<small className="pull-right">
