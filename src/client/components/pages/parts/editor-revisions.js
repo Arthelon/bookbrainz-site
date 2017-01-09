@@ -21,7 +21,8 @@
 const React = require('react');
 
 const bootstrap = require('react-bootstrap');
-const formatDate = require('../../../helpers/utils').formatDate;
+const formatDateWithinDay =
+	require('../../../helpers/utils').formatDateWithinDay;
 
 const ListGroup = bootstrap.ListGroup;
 const ListGroupItem = bootstrap.ListGroupItem;
@@ -37,12 +38,8 @@ class EditorRevisionsTab extends React.Component {
 				<h2>Revision History</h2>
 				<ListGroup>
 					{revisions.map((revision) => {
-						const createdDate = new Date(revision.createdAt);
-						let includeTime = false;
-						if (Date.now() - createdDate.getTime() < 86400000) {
-							includeTime = true;
-						}
-						const dateLabel = formatDate(createdDate, includeTime);
+						const dateLabel =
+							formatDateWithinDay(new Date(revision.createdAt));
 						const header = (
 							<h4 className="list-group-item-heading">
 								<small className="pull-right">

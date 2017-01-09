@@ -44,6 +44,12 @@ function formatDate(date, includeTime) {
 	return formatter.format('YYYY-MM-DD');
 }
 
+function formatDateWithinDay(date) {
+	'use strict';
+	const includeTime = Boolean(Date.now() - date.getTime() < 86400000);
+	return formatDate(date, includeTime);
+}
+
 function extractAttribute(attr, path) {
 	'use strict';
 	if (attr) {
@@ -55,6 +61,7 @@ function extractAttribute(attr, path) {
 	return '?';
 }
 
-exports.extractAttribute = extractAttribute;
 exports.injectDefaultAliasName = injectDefaultAliasName;
 exports.formatDate = formatDate;
+exports.formatDateWithinDay = formatDateWithinDay;
+exports.extractAttribute = extractAttribute;
