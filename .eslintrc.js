@@ -1,7 +1,6 @@
 /* eslint-disable import/unambiguous, import/no-commonjs, no-magic-numbers */
 /* eslint-disable no-inline-comments */
 
-
 const options = {
 	env: {
 		es6: true,
@@ -11,7 +10,10 @@ const options = {
 		'eslint:recommended',
 		'plugin:flowtype/recommended',
 		'plugin:react/recommended',
-		'plugin:import/recommended'
+		'plugin:import/recommended',
+		'prettier',
+		'prettier/flowtype',
+		'prettier/react'
 	],
 	parser: 'babel-eslint',
 	parserOptions: {
@@ -24,14 +26,8 @@ const options = {
 		ecmaVersion: 8,
 		sourceType: 'module'
 	},
-	plugins: [
-		'react',
-		'import',
-		'flowtype',
-		'babel'
-	]
+	plugins: ['react', 'import', 'flowtype', 'babel', 'prettier']
 };
-
 
 // Generally, don't change TRANSITION_* severities unless you're LordSputnik ;)
 const ERROR = 2;
@@ -78,15 +74,9 @@ const bestPracticesRules = {
 	'consistent-return': ERROR,
 	curly: ERROR,
 	'default-case': ERROR,
-	'dot-location': [
-		ERROR,
-		'property'
-	],
+	'dot-location': [ERROR, 'property'],
 	'dot-notation': ERROR,
-	eqeqeq: [
-		ERROR,
-		'allow-null'
-	],
+	eqeqeq: [ERROR, 'allow-null'],
 	'guard-for-in': ERROR,
 	'no-alert': ERROR,
 	'no-caller': ERROR,
@@ -111,13 +101,7 @@ const bestPracticesRules = {
 		{
 			detectObjects: true,
 			enforceConst: true,
-			ignore: [
-				0,
-				1,
-				2,
-				3,
-				10
-			],
+			ignore: [0, 1, 2, 3, 10],
 			ignoreArrayIndexes: true
 		}
 	],
@@ -147,18 +131,12 @@ const bestPracticesRules = {
 	radix: ERROR,
 	'require-await': ERROR,
 	'vars-on-top': ERROR,
-	'wrap-iife': [
-		ERROR,
-		'any'
-	],
+	'wrap-iife': [ERROR, 'any'],
 	yoda: ERROR
 };
 
 const strictModeRules = {
-	strict: [
-		ERROR,
-		'global'
-	]
+	strict: [ERROR, 'global']
 };
 
 const variablesRules = {
@@ -174,15 +152,7 @@ const variablesRules = {
 };
 
 const nodeAndCommonJSRules = {
-	'callback-return': [
-		ERROR,
-		[
-			'callback',
-			'cb',
-			'next',
-			'done'
-		]
-	],
+	'callback-return': [ERROR, ['callback', 'cb', 'next', 'done']],
 	'global-require': ERROR,
 	'handle-callback-err': ERROR,
 	'no-mixed-requires': ERROR,
@@ -195,10 +165,7 @@ const nodeAndCommonJSRules = {
 
 // Agreement of all project leads needed before changing these.
 const stylisticIssuesRules = {
-	'array-bracket-newline': [
-		ERROR,
-		'consistent'
-	],
+	'array-bracket-newline': [ERROR, 'consistent'],
 	'array-bracket-spacing': ERROR,
 	'block-spacing': ERROR,
 	'brace-style': [
@@ -218,34 +185,17 @@ const stylisticIssuesRules = {
 	'comma-spacing': ERROR,
 	'comma-style': ERROR,
 	'computed-property-spacing': ERROR,
-	'consistent-this': [
-		ERROR,
-		'self'
-	],
+	'consistent-this': [ERROR, 'self'],
 	'eol-last': ERROR,
 	'func-call-spacing': ERROR,
 	'func-name-matching': ERROR,
 	'func-names': ERROR,
-	'func-style': [
-		ERROR,
-		'declaration'
-	],
-	'function-paren-newline': [
-		TRANSITION_WARNING,
-		'consistent'
-	],
+	'func-style': [ERROR, 'declaration'],
+	'function-paren-newline': [TRANSITION_WARNING, 'consistent'],
 	'id-length': [
 		ERROR,
 		{
-			exceptions: [
-				'x',
-				'i',
-				'_',
-				'$',
-				'a',
-				'b',
-				'q'
-			]
+			exceptions: ['x', 'i', '_', '$', 'a', 'b', 'q']
 		}
 	],
 	indent: [
@@ -256,10 +206,7 @@ const stylisticIssuesRules = {
 			VariableDeclarator: 1
 		}
 	],
-	'jsx-quotes': [
-		ERROR,
-		'prefer-double'
-	],
+	'jsx-quotes': [ERROR, 'prefer-double'],
 	'key-spacing': ERROR,
 	'keyword-spacing': ERROR,
 	'linebreak-style': ERROR,
@@ -271,10 +218,7 @@ const stylisticIssuesRules = {
 		}
 	],
 	'lines-between-class-members': ERROR,
-	'max-depth': [
-		ERROR,
-		6
-	],
+	'max-depth': [ERROR, 6],
 	'max-len': [
 		ERROR,
 		{
@@ -284,18 +228,9 @@ const stylisticIssuesRules = {
 		}
 	],
 	'max-lines': TRANSITION_IGNORE,
-	'max-nested-callbacks': [
-		ERROR,
-		5
-	],
-	'max-params': [
-		TRANSITION_IGNORE,
-		4
-	],
-	'max-statements': [
-		TRANSITION_IGNORE,
-		15
-	],
+	'max-nested-callbacks': [ERROR, 5],
+	'max-params': [TRANSITION_IGNORE, 4],
+	'max-statements': [TRANSITION_IGNORE, 15],
 	'multiline-comment-style': ERROR,
 	'new-parens': ERROR,
 	'no-array-constructor': ERROR,
@@ -303,42 +238,20 @@ const stylisticIssuesRules = {
 	'no-continue': ERROR,
 	'no-inline-comments': ERROR,
 	'no-lonely-if': ERROR,
-	'no-mixed-spaces-and-tabs': [
-		ERROR,
-		'smart-tabs'
-	],
+	'no-mixed-spaces-and-tabs': [ERROR, 'smart-tabs'],
 	'no-multiple-empty-lines': ERROR,
 	'no-nested-ternary': ERROR,
 	'no-new-object': TRANSITION_IGNORE,
 	'no-trailing-spaces': ERROR,
 	'no-unneeded-ternary': ERROR,
 	'no-whitespace-before-property': ERROR,
-	'object-curly-newline': [
-		ERROR,
-		{consistent: true}
-	],
-	'one-var': [
-		ERROR,
-		'never'
-	],
+	'object-curly-newline': [ERROR, {consistent: true}],
+	'one-var': [ERROR, 'never'],
 	'operator-assignment': ERROR,
-	'operator-linebreak': [
-		ERROR,
-		'after'
-	],
-	'padded-blocks': [
-		ERROR,
-		'never'
-	],
-	'quote-props': [
-		ERROR,
-		'as-needed'
-	],
-	quotes: [
-		ERROR,
-		'single',
-		'avoid-escape'
-	],
+	'operator-linebreak': [ERROR, 'after'],
+	'padded-blocks': [ERROR, 'never'],
+	'quote-props': [ERROR, 'as-needed'],
+	quotes: [ERROR, 'single', 'avoid-escape'],
 	'require-jsdoc': TRANSITION_IGNORE,
 	'semi-spacing': [
 		ERROR,
@@ -426,10 +339,7 @@ const reactRules = {
 	'react/forbid-component-props': TRANSITION_IGNORE,
 	'react/forbid-foreign-prop-types': ERROR,
 	'react/jsx-boolean-value': ERROR,
-	'react/jsx-closing-bracket-location': [
-		ERROR,
-		'tag-aligned'
-	],
+	'react/jsx-closing-bracket-location': [ERROR, 'tag-aligned'],
 	'react/jsx-closing-tag-location': ERROR,
 	'react/jsx-curly-brace-presence': ERROR,
 	'react/jsx-curly-spacing': [
@@ -441,10 +351,7 @@ const reactRules = {
 	'react/jsx-equals-spacing': ERROR,
 	'react/jsx-first-prop-new-line': ERROR,
 	'react/jsx-handler-names': ERROR,
-	'react/jsx-indent-props': [
-		ERROR,
-		'tab'
-	],
+	'react/jsx-indent-props': [ERROR, 'tab'],
 	'react/jsx-no-bind': [
 		ERROR,
 		{
@@ -487,10 +394,7 @@ const reactRules = {
 	'react/no-unused-prop-types': ERROR,
 	'react/no-unused-state': TRANSITION_WARNING,
 	'react/no-will-update-set-state': ERROR,
-	'react/prefer-es6-class': [
-		ERROR,
-		'always'
-	],
+	'react/prefer-es6-class': [ERROR, 'always'],
 	'react/prefer-stateless-function': ERROR,
 	'react/require-default-props': [
 		ERROR,
@@ -547,6 +451,10 @@ const es6ImportRules = {
 	'import/no-unassigned-import': ERROR
 };
 
+const prettierRules = {
+	'prettier/prettier': ERROR
+};
+
 options.rules = Object.assign(
 	{},
 	possibleErrorsRules,
@@ -559,8 +467,8 @@ options.rules = Object.assign(
 	babelRules,
 	flowTypeRules,
 	reactRules,
-	es6ImportRules
+	es6ImportRules,
+	prettierRules
 );
-
 
 module.exports = options;
